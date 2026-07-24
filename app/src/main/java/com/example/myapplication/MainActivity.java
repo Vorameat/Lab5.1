@@ -21,24 +21,28 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        TextNote noteA = new TextNote();
+        TextNote noteB = new TextNote();
+        TextNote note1 = new TextNote();
 
-        Note noteA = new Note();
-        Note noteB = new Note();
-        Note note1 = new Note();
+        noteA.setTitle("Do Lab");
+        noteA.setContent("create class diagram and code");
+        noteA.setCreatedDate("06/07/2026");
 
-        noteA.title = "Do Lab";
-        noteA.content = "create class diagram and code";
-        noteA.createdDate = "06/07/2026";
-noteB .title ="";
-noteB.content ="";
-noteB.createdDate = "6 July 2026";
-noteB.getSummary();
-User user1 = new User();
-user1.IDcard = "6812247012";
-user1.Name = "PECK KUB";
-user1.Password ="123456";
-user1.login();
+        noteB.setTitle("");
+        noteB.setContent("");
+        noteB.setCreatedDate("6 July 2026");
+        noteB.getSummary();
+
+        User user1 = new User();
+        user1.setIdCard("6812247012");
+        user1.setName("PECK KUB");
+        user1.setPassword("123456");
+        user1.login();
+
+        user1.addTextNote(noteA);
+        user1.addTextNote(noteB);
+        user1.addTextNote(note1);
     }
-
 }
 
