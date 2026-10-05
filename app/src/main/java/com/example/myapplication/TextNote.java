@@ -1,49 +1,25 @@
 package com.example.myapplication;
 
-public class TextNote {
-    private String title;
+public class TextNote extends Note { // <-- ต้องมี extends Note ตรงนี้
     private String content;
-    private String createdDate;
 
     public TextNote() {
-        this.title = "";
+        super();
         this.content = "";
-        this.createdDate = "";
     }
 
-    public TextNote(String title, String createdDate, String content) {
-        this.title = title;
-        this.createdDate = createdDate;
+    public TextNote(String title, String createdDate, String content, User user) {
+        super(title, createdDate, user);
         this.content = content;
     }
 
+    @Override
     public void getSummary() {
         System.out.println("Title: " + title);
         System.out.println("Content: " + content);
         System.out.println("Date: " + createdDate);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
+    public String getContent() { return content; }
+    public void setContent(String content) { this.content = content; }
 }
