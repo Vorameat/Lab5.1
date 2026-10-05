@@ -33,4 +33,5 @@ public class CheckListNote extends Note {
     public List<String> getCheckList() {
         return checkList;
     }
+
 }

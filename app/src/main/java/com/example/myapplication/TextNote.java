@@ -22,4 +22,10 @@ public class TextNote extends Note { // <-- ต้องมี extends Note ต�
 
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
-}
+
+    // แก้ไข Constructor ใน TextNote.java
+    public TextNote(String title, String content) {
+        super(title, "", null); // เรียกใช้ Constructor ของ Note(String, String, User)
+        this.content = content;
+    }
+    }

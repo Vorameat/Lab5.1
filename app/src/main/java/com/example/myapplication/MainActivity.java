@@ -4,54 +4,58 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+    private Button btnAddNote;
+    private TextView tvUserInfo, tvNoteList;
+    private NoteController noteController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        TextNote noteA = new TextNote();
-        TextNote noteB = new TextNote();
-        TextNote note1 = new TextNote();
+        btnAddNote = findViewById(R.id.btnAddNote);
+        tvUserInfo = findViewById(R.id.tvUserInfo);
+        tvNoteList = findViewById(R.id.tvNoteList);
 
-        noteA.setTitle("Do Lab");
-        noteA.setContent("create class diagram and code");
-        noteA.setCreatedDate("06/07/2026");
 
-        noteB.setTitle("");
-        noteB.setContent("");
-        noteB.setCreatedDate("6 July 2026");
-        noteB.getSummary();
+        User currentUser = new User("Vorameat", "vorameat@email.com");
 
-        User user1 = new User();
-        user1.setIdCard("6812247012");
-        user1.setName("PECK KUB");
-        user1.setPassword("123456");
-        user1.login();
 
-        user1.addTextNote(noteA);
-        user1.addTextNote(noteB);
-        user1.addTextNote(note1);
+        noteController = new NoteController(currentUser);
 
-        // เพิ่มใน OnCreate ของ MainActivity
-        Button btnAddNote = findViewById(R.id.btnAddNote);
+
+        tvUserInfo.setText(noteController.getUserInfo());
+
+
         btnAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Event เปลี่ยนหน้าไป AddNoteActivity
                 Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
                 startActivity(intent);
             }
         });
     }
-}
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayNotes();
+    }
+
+    private void displayNotes() {
+        StringBuilder builder = new StringBuilder();
+        for (Note note : noteController.getUserNotes()) {
+            builder.append("- ").append(note.getTitle()).append("\n");
+        }
+
+        if (builder.length() == 0) {
+            tvNoteList.setText("ยังไม่มีรายการโน้ต");
+        } else {
+            tvNoteList.setText(builder.toString());
+        }
+    }
+}
